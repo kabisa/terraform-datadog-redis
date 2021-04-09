@@ -46,7 +46,14 @@ variable "oom_error_alerting_enabled" {
   default = true
 }
 
-variable "type" {
+variable "oom_error_type" {
   type    = string
   default = "log alert"
+}
+
+variable "oom_error_priority" {
+  description = "Number from 1 (high) to 5 (low)."
+
+  type    = number
+  default = null
 }

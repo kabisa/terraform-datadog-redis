@@ -45,3 +45,10 @@ variable "blocked_clients_alerting_enabled" {
   type    = bool
   default = true
 }
+
+variable "blocked_clients_priority" {
+  description = "Number from 1 (high) to 5 (low)."
+
+  type    = number
+  default = null
+}
