@@ -1,6 +1,6 @@
 variable "latency_enabled" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Latency in redis"
 }
 

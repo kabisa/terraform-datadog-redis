@@ -1,47 +1,47 @@
-variable "blocked_enabled" {
-  type    = bool
-  default = true
+variable "blocked_clients_enabled" {
+  type        = bool
+  default     = true
   description = "blocked in redis"
 }
 
-variable "blocked_warning" {
+variable "blocked_clients_warning" {
   type    = number
   default = 5
   # 10 blockeds
 }
 
-variable "blocked_critical" {
+variable "blocked_clients_critical" {
   type    = number
   default = 10
   # 20 blockeds
 }
 
-variable "blocked_evaluation_period" {
+variable "blocked_clients_evaluation_period" {
   type    = string
   default = "last_5m"
 }
 
-variable "blocked_severity" {
+variable "blocked_clients_severity" {
   type    = string
   default = "critical"
 }
 
-variable "blocked_note" {
+variable "blocked_clients_note" {
   type    = string
   default = ""
 }
 
-variable "blocked_docs" {
+variable "blocked_clients_docs" {
   type    = string
   default = ""
 }
 
-variable "blocked_filter_override" {
+variable "blocked_clients_filter_override" {
   type    = string
   default = ""
 }
 
-variable "blocked_alerting_enabled" {
+variable "blocked_clients_alerting_enabled" {
   type    = bool
   default = true
 }

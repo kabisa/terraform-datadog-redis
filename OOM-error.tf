@@ -5,7 +5,7 @@ locals {
   )
 }
 
-module "redis_oom_error" {
+module "oom_error" {
   source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
 
   name  = "Out Of Memory errors in the logs"
@@ -30,7 +30,7 @@ See: https://app.datadoghq.eu/logs?query=OOM%20command%20not%20allowed%20when%20
   notification_channel = var.notification_channel
 
   require_full_window = true
-  locked = var.locked
+  locked              = var.locked
 
   type = var.type
 

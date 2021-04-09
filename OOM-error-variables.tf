@@ -1,6 +1,6 @@
 variable "oom_error_enabled" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
   description = "oom_error in redis"
 }
 
@@ -47,6 +47,6 @@ variable "oom_error_alerting_enabled" {
 }
 
 variable "type" {
-  type = string
+  type    = string
   default = "log alert"
 }

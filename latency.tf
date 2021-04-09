@@ -5,7 +5,7 @@ locals {
   )
 }
 
-module "redis_latency" {
+module "latency" {
   source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
 
   name  = "Latency"
@@ -27,7 +27,7 @@ module "redis_latency" {
   notification_channel = var.notification_channel
 
   require_full_window = true
-  locked = var.locked
+  locked              = var.locked
 
   critical_threshold = var.latency_critical
   warning_threshold  = var.latency_warning
