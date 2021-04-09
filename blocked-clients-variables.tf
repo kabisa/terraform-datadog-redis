@@ -7,13 +7,13 @@ variable "blocked_enabled" {
 variable "blocked_warning" {
   type    = number
   default = 5
-  # 10 blockeds
+  # 5 blocked clients
 }
 
 variable "blocked_critical" {
   type    = number
   default = 10
-  # 20 blockeds
+  # 10 blocked clients
 }
 
 variable "blocked_evaluation_period" {
