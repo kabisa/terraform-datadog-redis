@@ -1,47 +1,47 @@
-variable "eviction_enabled" {
-  type    = bool
-  default = true
+variable "evicted_keys_enabled" {
+  type        = bool
+  default     = true
   description = "eviction in redis"
 }
 
-variable "eviction_warning" {
+variable "evicted_keys_warning" {
   type    = number
   default = 10
   # 10 evictions
 }
 
-variable "eviction_critical" {
+variable "evicted_keys_critical" {
   type    = number
   default = 20
   # 20 evictions
 }
 
-variable "eviction_evaluation_period" {
+variable "evicted_keys_evaluation_period" {
   type    = string
   default = "last_5m"
 }
 
-variable "eviction_severity" {
+variable "evicted_keys_severity" {
   type    = string
   default = "critical"
 }
 
-variable "eviction_note" {
+variable "evicted_keys_note" {
   type    = string
   default = ""
 }
 
-variable "eviction_docs" {
+variable "evicted_keys_docs" {
   type    = string
   default = ""
 }
 
-variable "eviction_filter_override" {
+variable "evicted_keys_filter_override" {
   type    = string
   default = ""
 }
 
-variable "eviction_alerting_enabled" {
+variable "evicted_keys_alerting_enabled" {
   type    = bool
   default = true
 }

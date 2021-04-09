@@ -5,7 +5,7 @@ locals {
   )
 }
 
-module "redis_connected_clients" {
+module "connected_clients" {
   source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
 
   name  = "Connected Clients"
@@ -27,7 +27,7 @@ module "redis_connected_clients" {
   notification_channel = var.notification_channel
 
   require_full_window = true
-  locked = var.locked
+  locked              = var.locked
 
   critical_threshold = var.connected_clients_critical
   warning_threshold  = var.connected_clients_warning

@@ -1,6 +1,6 @@
 variable "hitratio_enabled" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
   description = "hitratio in redis"
 }
 

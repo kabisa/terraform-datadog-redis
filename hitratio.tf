@@ -5,7 +5,7 @@ locals {
   )
 }
 
-module "redis_hitratio" {
+module "hitratio" {
   source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
 
   name  = "Hitratio"
@@ -28,7 +28,7 @@ module "redis_hitratio" {
   notification_channel = var.notification_channel
 
   require_full_window = true
-  locked = var.locked
+  locked              = var.locked
 
   critical_threshold = var.hitratio_critical
   warning_threshold  = var.hitratio_warning

@@ -1,6 +1,6 @@
 variable "connected_clients_enabled" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
   description = "connected_clients in redis"
 }
 
