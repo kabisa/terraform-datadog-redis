@@ -6,14 +6,14 @@ variable "connected_clients_enabled" {
 
 variable "connected_clients_warning" {
   type    = number
-  default = 20
-  # 20 connected_clientss
+  default = 600
+  # 600 connected_clientss
 }
 
 variable "connected_clients_critical" {
   type    = number
-  default = 30
-  # 30 connected_clientss
+  default = 800
+  # 800 connected_clientss
 }
 
 variable "connected_clients_evaluation_period" {
