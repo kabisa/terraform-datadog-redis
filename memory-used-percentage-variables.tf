@@ -45,3 +45,10 @@ variable "memory_used_percentage_alerting_enabled" {
   type    = bool
   default = true
 }
+
+variable "memory_used_percentage_priority" {
+  description = "Number from 1 (high) to 5 (low)."
+
+  type    = number
+  default = null
+}

@@ -45,3 +45,10 @@ variable "latency_alerting_enabled" {
   type    = bool
   default = true
 }
+
+variable "latency_priority" {
+  description = "Number from 1 (high) to 5 (low)."
+
+  type    = number
+  default = null
+}
