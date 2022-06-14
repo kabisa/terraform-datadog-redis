@@ -6,7 +6,8 @@ locals {
 }
 
 module "memory_used_percentage" {
-  source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
+  source  = "kabisa/generic-monitor/datadog"
+  version = "0.7.5"
 
   name             = "Memory Usage"
   query            = "avg(${var.memory_used_percentage_evaluation_period}):( avg:redis.mem.used{${local.memory_used_percentage_filter}} / avg:redis.mem.maxmemory{${local.memory_used_percentage_filter}} ) * 100 >= ${var.memory_used_percentage_critical}"

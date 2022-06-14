@@ -6,7 +6,8 @@ locals {
 }
 
 module "latency" {
-  source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
+  source  = "kabisa/generic-monitor/datadog"
+  version = "0.7.5"
 
   name             = "Latency"
   query            = "avg(${var.latency_evaluation_period}):avg:redis.info.latency_ms{${local.latency_filter}} >= ${var.latency_critical}"

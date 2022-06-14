@@ -6,7 +6,8 @@ locals {
 }
 
 module "evicted_keys" {
-  source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
+  source  = "kabisa/generic-monitor/datadog"
+  version = "0.7.5"
 
   name             = "Evicted Keys"
   query            = "avg(${var.evicted_keys_evaluation_period}):avg:redis.keys.evicted{${local.evicted_keys_filter}} >= ${var.evicted_keys_critical}"

@@ -6,7 +6,8 @@ locals {
 }
 
 module "memory_fragmentation" {
-  source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
+  source  = "kabisa/generic-monitor/datadog"
+  version = "0.7.5"
 
   name             = "Memory Fragmentation"
   query            = "avg(${var.memory_fragmentation_evaluation_period}):avg:redis.mem.fragmentation_ratio{${local.memory_fragmentation_filter}} > ${var.memory_fragmentation_critical}"

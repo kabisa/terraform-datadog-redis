@@ -6,7 +6,8 @@ locals {
 }
 
 module "connected_clients" {
-  source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
+  source  = "kabisa/generic-monitor/datadog"
+  version = "0.7.5"
 
   name             = "Connected Clients"
   query            = "avg(${var.connected_clients_evaluation_period}):avg:redis.net.clients{${local.connected_clients_filter}} >= ${var.connected_clients_critical}"

@@ -6,7 +6,8 @@ locals {
 }
 
 module "oom_error" {
-  source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
+  source  = "kabisa/generic-monitor/datadog"
+  version = "0.7.5"
 
   name             = "Out Of Memory errors in the logs"
   query            = "logs(\"OOM command not allowed when used memory \\> 'maxmemory'.\").index(\"*\").rollup(\"count\").last(\"15m\") > ${var.oom_error_critical}"

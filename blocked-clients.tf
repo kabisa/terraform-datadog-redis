@@ -6,7 +6,8 @@ locals {
 }
 
 module "blocked_clients_clients" {
-  source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
+  source  = "kabisa/generic-monitor/datadog"
+  version = "0.7.5"
 
   name             = "Blocked Clients"
   query            = "avg(${var.blocked_clients_evaluation_period}):avg:redis.clients.blocked{${local.blocked_clients_filter}} >= ${var.blocked_clients_critical}"

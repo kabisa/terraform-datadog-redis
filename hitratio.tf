@@ -6,7 +6,8 @@ locals {
 }
 
 module "hitratio" {
-  source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
+  source  = "kabisa/generic-monitor/datadog"
+  version = "0.7.5"
 
   name             = "Hitratio"
   query            = "avg(${var.hitratio_evaluation_period}):( avg:redis.stats.keyspace_hits{${local.hitratio_filter}} / ( avg:redis.stats.keyspace_hits{${local.hitratio_filter}} + avg:redis.stats.keyspace_misses{${local.hitratio_filter}} ) ) * 100 <= ${var.hitratio_critical}"
