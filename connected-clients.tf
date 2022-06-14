@@ -20,7 +20,6 @@ module "connected_clients" {
   critical_threshold = var.connected_clients_critical
   warning_threshold  = var.connected_clients_warning
   priority           = var.connected_clients_priority
-  severity           = var.connected_clients_severity
   docs               = var.connected_clients_docs
   note               = var.connected_clients_note
 

@@ -24,7 +24,6 @@ See: https://app.datadoghq.eu/logs?query=OOM%20command%20not%20allowed%20when%20
   critical_threshold = var.oom_error_critical
   warning_threshold  = var.oom_error_warning
   priority           = var.oom_error_priority
-  severity           = var.oom_error_severity
   docs               = var.oom_error_docs
   note               = var.oom_error_note
 

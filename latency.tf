@@ -20,7 +20,6 @@ module "latency" {
   critical_threshold = var.latency_critical
   warning_threshold  = var.latency_warning
   priority           = var.latency_priority
-  severity           = var.latency_severity
   docs               = var.latency_docs
   note               = var.latency_note
 

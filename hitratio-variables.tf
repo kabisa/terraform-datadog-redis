@@ -21,11 +21,6 @@ variable "hitratio_evaluation_period" {
   default = "last_5m"
 }
 
-variable "hitratio_severity" {
-  type    = string
-  default = "critical"
-}
-
 variable "hitratio_note" {
   type    = string
   default = ""
@@ -50,5 +45,5 @@ variable "hitratio_priority" {
   description = "Number from 1 (high) to 5 (low)."
 
   type    = number
-  default = null
+  default = 4
 }

@@ -20,7 +20,6 @@ module "evicted_keys" {
   critical_threshold = var.evicted_keys_critical
   warning_threshold  = var.evicted_keys_warning
   priority           = var.evicted_keys_priority
-  severity           = var.evicted_keys_severity
   note               = var.evicted_keys_note
   docs               = var.evicted_keys_docs
 

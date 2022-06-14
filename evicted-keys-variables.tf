@@ -21,11 +21,6 @@ variable "evicted_keys_evaluation_period" {
   default = "last_5m"
 }
 
-variable "evicted_keys_severity" {
-  type    = string
-  default = "critical"
-}
-
 variable "evicted_keys_note" {
   type    = string
   default = ""
@@ -50,5 +45,5 @@ variable "evicted_keys_priority" {
   description = "Number from 1 (high) to 5 (low)."
 
   type    = number
-  default = null
+  default = 3
 }

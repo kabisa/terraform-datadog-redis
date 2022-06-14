@@ -6,24 +6,18 @@ variable "latency_enabled" {
 
 variable "latency_warning" {
   type    = number
-  default = 8
-  # 8MS
+  default = null
 }
 
 variable "latency_critical" {
   type    = number
-  default = 10
-  # 10MS
+  default = 25
+  # 25MS
 }
 
 variable "latency_evaluation_period" {
   type    = string
-  default = "last_5m"
-}
-
-variable "latency_severity" {
-  type    = string
-  default = "critical"
+  default = "last_15m"
 }
 
 variable "latency_note" {
@@ -50,5 +44,5 @@ variable "latency_priority" {
   description = "Number from 1 (high) to 5 (low)."
 
   type    = number
-  default = null
+  default = 3
 }

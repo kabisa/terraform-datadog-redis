@@ -20,7 +20,6 @@ module "memory_fragmentation" {
   critical_threshold = var.memory_fragmentation_critical
   warning_threshold  = var.memory_fragmentation_warning
   priority           = var.memory_fragmentation_priority
-  severity           = var.memory_fragmentation_severity
   docs               = var.memory_fragmentation_docs
   note               = var.memory_fragmentation_note
 

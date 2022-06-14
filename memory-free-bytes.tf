@@ -20,7 +20,6 @@ module "memory_free_bytes" {
   critical_threshold = var.memory_free_bytes_critical
   warning_threshold  = var.memory_free_bytes_warning
   priority           = var.memory_free_bytes_priority
-  severity           = var.memory_free_bytes_severity
   docs               = var.memory_free_bytes_docs
   note               = var.memory_free_bytes_note
 

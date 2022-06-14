@@ -20,7 +20,6 @@ module "blocked_clients_clients" {
   critical_threshold = var.blocked_clients_critical
   warning_threshold  = var.blocked_clients_warning
   priority           = var.blocked_clients_priority
-  severity           = var.blocked_clients_severity
   docs               = var.blocked_clients_docs
   note               = var.blocked_clients_note
 

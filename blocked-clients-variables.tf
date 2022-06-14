@@ -21,11 +21,6 @@ variable "blocked_clients_evaluation_period" {
   default = "last_5m"
 }
 
-variable "blocked_clients_severity" {
-  type    = string
-  default = "critical"
-}
-
 variable "blocked_clients_note" {
   type    = string
   default = ""
@@ -50,5 +45,5 @@ variable "blocked_clients_priority" {
   description = "Number from 1 (high) to 5 (low)."
 
   type    = number
-  default = null
+  default = 2
 }

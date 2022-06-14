@@ -20,7 +20,6 @@ module "hitratio" {
   critical_threshold = var.hitratio_critical
   warning_threshold  = var.hitratio_warning
   priority           = var.hitratio_priority
-  severity           = var.hitratio_severity
   docs               = var.hitratio_docs
   note               = var.hitratio_note
 

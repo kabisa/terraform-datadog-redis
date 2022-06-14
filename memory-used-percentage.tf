@@ -20,7 +20,6 @@ module "memory_used_percentage" {
   critical_threshold = var.memory_used_percentage_critical
   warning_threshold  = var.memory_used_percentage_warning
   priority           = var.memory_used_percentage_priority
-  severity           = var.memory_used_percentage_severity
   docs               = var.memory_used_percentage_docs
   note               = var.memory_used_percentage_note
 
