@@ -1,13 +1,13 @@
 variable "memory_fragmentation_enabled" {
   type        = bool
   default     = true
-  description = "memfrag in redis"
+  description = "Memory fragmentation in redis"
 }
 
 variable "memory_fragmentation_warning" {
   type    = number
   default = 1.1
-  # more then 1 signle memory block is already a sign of trouble 
+  # More then 1 single memory block is already a sign of trouble
 }
 
 variable "memory_fragmentation_critical" {

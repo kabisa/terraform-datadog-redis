@@ -28,7 +28,9 @@ variable "memory_free_bytes_severity" {
 
 variable "memory_free_bytes_note" {
   type    = string
-  default = ""
+  default = <<EOF
+Sometimes, when Redis is configured with no max memory limit, memory usage will eventually reach system memory, and the server will start throwing “Out of Memory” errors. At other times, Redis is configured with a max memory limit but noeviction policy. This would cause the server not to evict any keys, thus preventing any writes until memory is freed. The solution to such problems would be configuring Redis with max memory and some eviction policy. In this case, the server starts evicting keys using eviction policy as memory usage reaches the max.
+EOF
 }
 
 variable "memory_free_bytes_docs" {
