@@ -21,11 +21,6 @@ variable "memory_used_percentage_evaluation_period" {
   default = "last_5m"
 }
 
-variable "memory_used_percentage_severity" {
-  type    = string
-  default = "critical"
-}
-
 variable "memory_used_percentage_note" {
   type    = string
   default = ""
@@ -50,5 +45,5 @@ variable "memory_used_percentage_priority" {
   description = "Number from 1 (high) to 5 (low)."
 
   type    = number
-  default = null
+  default = 2
 }

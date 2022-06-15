@@ -21,11 +21,6 @@
 #   default = "last_2w"
 # }
 
-# variable "opspersec_severity" {
-#   type    = string
-#   default = "critical"
-# }
-
 # variable "opspersec_note" {
 #   type    = string
 #   default = ""

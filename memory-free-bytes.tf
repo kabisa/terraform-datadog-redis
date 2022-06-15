@@ -6,7 +6,8 @@ locals {
 }
 
 module "memory_free_bytes" {
-  source = "git@github.com:kabisa/terraform-datadog-generic-monitor.git?ref=0.5"
+  source  = "kabisa/generic-monitor/datadog"
+  version = "0.7.5"
 
   name             = "Available Memory"
   query            = "avg(${var.memory_free_bytes_evaluation_period}):avg:redis.mem.maxmemory{${local.memory_free_bytes_filter}} - avg:redis.mem.used{${local.memory_free_bytes_filter}} < ${var.memory_free_bytes_critical}"
@@ -19,7 +20,6 @@ module "memory_free_bytes" {
   critical_threshold = var.memory_free_bytes_critical
   warning_threshold  = var.memory_free_bytes_warning
   priority           = var.memory_free_bytes_priority
-  severity           = var.memory_free_bytes_severity
   docs               = var.memory_free_bytes_docs
   note               = var.memory_free_bytes_note
 

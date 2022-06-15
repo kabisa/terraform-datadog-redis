@@ -21,11 +21,6 @@ variable "oom_error_evaluation_period" {
   default = "last_5m"
 }
 
-variable "oom_error_severity" {
-  type    = string
-  default = "critical"
-}
-
 variable "oom_error_note" {
   type    = string
   default = ""
@@ -55,5 +50,5 @@ variable "oom_error_priority" {
   description = "Number from 1 (high) to 5 (low)."
 
   type    = number
-  default = null
+  default = 2
 }
