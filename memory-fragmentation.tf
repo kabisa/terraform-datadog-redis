@@ -7,7 +7,7 @@ locals {
 
 module "memory_fragmentation" {
   source  = "kabisa/generic-monitor/datadog"
-  version = "0.7.5"
+  version = "1.0.0"
 
   name             = "Memory Fragmentation"
   query            = "avg(${var.memory_fragmentation_evaluation_period}):avg:redis.mem.fragmentation_ratio{${local.memory_fragmentation_filter}} > ${var.memory_fragmentation_critical}"

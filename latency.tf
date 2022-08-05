@@ -7,7 +7,7 @@ locals {
 
 module "latency" {
   source  = "kabisa/generic-monitor/datadog"
-  version = "0.7.5"
+  version = "1.0.0"
 
   name             = "Latency"
   query            = "avg(${var.latency_evaluation_period}):avg:redis.info.latency_ms{${local.latency_filter}} >= ${var.latency_critical}"

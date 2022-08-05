@@ -7,7 +7,7 @@ locals {
 
 module "connected_clients" {
   source  = "kabisa/generic-monitor/datadog"
-  version = "0.7.5"
+  version = "1.0.0"
 
   name             = "Connected Clients"
   query            = "avg(${var.connected_clients_evaluation_period}):avg:redis.net.clients{${local.connected_clients_filter}} >= ${var.connected_clients_critical}"

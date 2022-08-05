@@ -14,46 +14,30 @@ We have two base modules we use to standardise development of our Monitor Module
 
 Modules are generated with this tool: https://github.com/kabisa/datadog-terraform-generator
 
+
+[Module Variables](#module-variables)
+
 Monitors:
-* [Terraform module for Datadog Redis](#terraform-module-for-datadog-redis)
-  * [Evicted Keys](#evicted-keys)
-  * [Blocked Clients](#blocked-clients)
-  * [Connected Clients](#connected-clients)
-  * [Hitratio](#hitratio)
-  * [Memory Free Bytes](#memory-free-bytes)
-  * [Memory Fragmentation](#memory-fragmentation)
-  * [Oom Error](#oom-error)
-  * [Memory Used Percentage](#memory-used-percentage)
-  * [Latency](#latency)
-  * [Module Variables](#module-variables)
+
+| Monitor name    | Default enabled | Priority | Query                  |
+|-----------------|------|----|------------------------|
+| [Blocked Clients](#blocked-clients) | True | 2  | `avg(last_5m):avg:redis.clients.blocked{tag:xxx} >= 10` |
+| [Connected Clients](#connected-clients) | True | 3  | `avg(last_5m):avg:redis.net.clients{tag:xxx} >= 800` |
+| [Evicted Keys](#evicted-keys) | True | 3  | `avg(last_5m):avg:redis.keys.evicted{tag:xxx} >= 20` |
+| [Hitratio](#hitratio) | True | 4  | `avg(last_5m):( avg:redis.stats.keyspace_hits{tag:xxx} / ( avg:redis.stats.keyspace_hits{tag:xxx} + avg:redis.stats.keyspace_misses{tag:xxx} ) ) * 100 <= 40` |
+| [Latency](#latency) | True | 3  | `avg(last_15m):avg:redis.info.latency_ms{tag:xxx} >= 25` |
+| [Memory Fragmentation](#memory-fragmentation) | True | 3  | `avg(last_5m):avg:redis.mem.fragmentation_ratio{tag:xxx} > 1.5` |
+| [Memory Free Bytes](#memory-free-bytes) | True | 2  | `avg(last_5m):avg:redis.mem.maxmemory{tag:xxx} - avg:redis.mem.used{tag:xxx} < 500000000` |
+| [Memory Used Percentage](#memory-used-percentage) | True | 2  | `avg(last_5m):( avg:redis.mem.used{tag:xxx} / avg:redis.mem.maxmemory{tag:xxx} ) * 100 >= 95` |
+| [Oom Error](#oom-error) | True | 2  | `logs(\"OOM command not allowed when used memory \\> 'maxmemory'.\").index(\"*\").rollup(\"count\").last(\"15m\") > 5` |
 
 # Getting started developing
 [pre-commit](http://pre-commit.com/) was used to do Terraform linting and validating.
 
 Steps:
    - Install [pre-commit](http://pre-commit.com/). E.g. `brew install pre-commit`.
-   - Run `pre-commit install` in this repo. (Every time you cloud a repo with pre-commit enabled you will need to run the pre-commit install command)
+   - Run `pre-commit install` in this repo. (Every time you clone a repo with pre-commit enabled you will need to run the pre-commit install command)
    - That’s it! Now every time you commit a code change (`.tf` file), the hooks in the `hooks:` config `.pre-commit-config.yaml` will execute.
-
-## Evicted Keys
-
-Query:
-```terraform
-avg(last_5m):avg:redis.keys.evicted{tag:xxx} >= 20
-```
-
-| variable                       | default  | required | description                      |
-|--------------------------------|----------|----------|----------------------------------|
-| evicted_keys_enabled           | True     | No       | eviction in redis                |
-| evicted_keys_warning           | 10       | No       |                                  |
-| evicted_keys_critical          | 20       | No       |                                  |
-| evicted_keys_evaluation_period | last_5m  | No       |                                  |
-| evicted_keys_note              | ""       | No       |                                  |
-| evicted_keys_docs              | ""       | No       |                                  |
-| evicted_keys_filter_override   | ""       | No       |                                  |
-| evicted_keys_alerting_enabled  | True     | No       |                                  |
-| evicted_keys_priority          | 3        | No       | Number from 1 (high) to 5 (low). |
-
 
 ## Blocked Clients
 
@@ -95,6 +79,26 @@ avg(last_5m):avg:redis.net.clients{tag:xxx} >= 800
 | connected_clients_priority          | 3        | No       | Number from 1 (high) to 5 (low). |
 
 
+## Evicted Keys
+
+Query:
+```terraform
+avg(last_5m):avg:redis.keys.evicted{tag:xxx} >= 20
+```
+
+| variable                       | default  | required | description                      |
+|--------------------------------|----------|----------|----------------------------------|
+| evicted_keys_enabled           | True     | No       | eviction in redis                |
+| evicted_keys_warning           | 10       | No       |                                  |
+| evicted_keys_critical          | 20       | No       |                                  |
+| evicted_keys_evaluation_period | last_5m  | No       |                                  |
+| evicted_keys_note              | ""       | No       |                                  |
+| evicted_keys_docs              | ""       | No       |                                  |
+| evicted_keys_filter_override   | ""       | No       |                                  |
+| evicted_keys_alerting_enabled  | True     | No       |                                  |
+| evicted_keys_priority          | 3        | No       | Number from 1 (high) to 5 (low). |
+
+
 ## Hitratio
 
 Query:
@@ -115,24 +119,24 @@ avg(last_5m):( avg:redis.stats.keyspace_hits{tag:xxx} / ( avg:redis.stats.keyspa
 | hitratio_priority          | 4        | No       | Number from 1 (high) to 5 (low). |
 
 
-## Memory Free Bytes
+## Latency
 
 Query:
 ```terraform
-avg(last_5m):avg:redis.mem.maxmemory{tag:xxx} - avg:redis.mem.used{tag:xxx} < 500000000
+avg(last_15m):avg:redis.info.latency_ms{tag:xxx} >= 25
 ```
 
-| variable                            | default    | required | description                      |
-|-------------------------------------|------------|----------|----------------------------------|
-| memory_free_bytes_enabled           | True       | No       | Memory free in redis             |
-| memory_free_bytes_warning           | 1000000000 | No       |                                  |
-| memory_free_bytes_critical          | 500000000  | No       |                                  |
-| memory_free_bytes_evaluation_period | last_5m    | No       |                                  |
-| memory_free_bytes_note              | ""         | No       |                                  |
-| memory_free_bytes_docs              | ""         | No       |                                  |
-| memory_free_bytes_filter_override   | ""         | No       |                                  |
-| memory_free_bytes_alerting_enabled  | True       | No       |                                  |
-| memory_free_bytes_priority          | 2          | No       | Number from 1 (high) to 5 (low). |
+| variable                  | default  | required | description                      |
+|---------------------------|----------|----------|----------------------------------|
+| latency_enabled           | True     | No       | Latency in redis                 |
+| latency_warning           | None     | No       |                                  |
+| latency_critical          | 25       | No       |                                  |
+| latency_evaluation_period | last_15m | No       |                                  |
+| latency_note              | ""       | No       |                                  |
+| latency_docs              | ""       | No       |                                  |
+| latency_filter_override   | ""       | No       |                                  |
+| latency_alerting_enabled  | True     | No       |                                  |
+| latency_priority          | 3        | No       | Number from 1 (high) to 5 (low). |
 
 
 ## Memory Fragmentation
@@ -155,25 +159,24 @@ avg(last_5m):avg:redis.mem.fragmentation_ratio{tag:xxx} > 1.5
 | memory_fragmentation_priority          | 3        | No       | Number from 1 (high) to 5 (low).                             |
 
 
-## Oom Error
+## Memory Free Bytes
 
 Query:
 ```terraform
-logs(\"OOM command not allowed when used memory \\> 'maxmemory'.\").index(\"*\").rollup(\"count\").last(\"15m\") > 5
+avg(last_5m):avg:redis.mem.maxmemory{tag:xxx} - avg:redis.mem.used{tag:xxx} < 500000000
 ```
 
-| variable                    | default   | required | description                      |
-|-----------------------------|-----------|----------|----------------------------------|
-| oom_error_enabled           | True      | No       | oom_error in redis               |
-| oom_error_warning           | 1         | No       |                                  |
-| oom_error_critical          | 5         | No       |                                  |
-| oom_error_evaluation_period | last_5m   | No       |                                  |
-| oom_error_note              | ""        | No       |                                  |
-| oom_error_docs              | ""        | No       |                                  |
-| oom_error_filter_override   | ""        | No       |                                  |
-| oom_error_alerting_enabled  | True      | No       |                                  |
-| oom_error_type              | log alert | No       |                                  |
-| oom_error_priority          | 2         | No       | Number from 1 (high) to 5 (low). |
+| variable                            | default    | required | description                      |
+|-------------------------------------|------------|----------|----------------------------------|
+| memory_free_bytes_enabled           | True       | No       | Memory free in redis             |
+| memory_free_bytes_warning           | 1000000000 | No       |                                  |
+| memory_free_bytes_critical          | 500000000  | No       |                                  |
+| memory_free_bytes_evaluation_period | last_5m    | No       |                                  |
+| memory_free_bytes_note              | ""         | No       |                                  |
+| memory_free_bytes_docs              | ""         | No       |                                  |
+| memory_free_bytes_filter_override   | ""         | No       |                                  |
+| memory_free_bytes_alerting_enabled  | True       | No       |                                  |
+| memory_free_bytes_priority          | 2          | No       | Number from 1 (high) to 5 (low). |
 
 
 ## Memory Used Percentage
@@ -196,24 +199,25 @@ avg(last_5m):( avg:redis.mem.used{tag:xxx} / avg:redis.mem.maxmemory{tag:xxx} ) 
 | memory_used_percentage_priority          | 2        | No       | Number from 1 (high) to 5 (low). |
 
 
-## Latency
+## Oom Error
 
 Query:
 ```terraform
-avg(last_15m):avg:redis.info.latency_ms{tag:xxx} >= 25
+logs(\"OOM command not allowed when used memory \\> 'maxmemory'.\").index(\"*\").rollup(\"count\").last(\"15m\") > 5
 ```
 
-| variable                  | default  | required | description                      |
-|---------------------------|----------|----------|----------------------------------|
-| latency_enabled           | True     | No       | Latency in redis                 |
-| latency_warning           | None     | No       |                                  |
-| latency_critical          | 25       | No       |                                  |
-| latency_evaluation_period | last_15m | No       |                                  |
-| latency_note              | ""       | No       |                                  |
-| latency_docs              | ""       | No       |                                  |
-| latency_filter_override   | ""       | No       |                                  |
-| latency_alerting_enabled  | True     | No       |                                  |
-| latency_priority          | 3        | No       | Number from 1 (high) to 5 (low). |
+| variable                    | default   | required | description                      |
+|-----------------------------|-----------|----------|----------------------------------|
+| oom_error_enabled           | True      | No       | oom_error in redis               |
+| oom_error_warning           | 1         | No       |                                  |
+| oom_error_critical          | 5         | No       |                                  |
+| oom_error_evaluation_period | last_5m   | No       |                                  |
+| oom_error_note              | ""        | No       |                                  |
+| oom_error_docs              | ""        | No       |                                  |
+| oom_error_filter_override   | ""        | No       |                                  |
+| oom_error_alerting_enabled  | True      | No       |                                  |
+| oom_error_type              | log alert | No       |                                  |
+| oom_error_priority          | 2         | No       | Number from 1 (high) to 5 (low). |
 
 
 ## Module Variables
