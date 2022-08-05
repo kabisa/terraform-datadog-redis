@@ -7,7 +7,7 @@ locals {
 
 module "evicted_keys" {
   source  = "kabisa/generic-monitor/datadog"
-  version = "0.7.5"
+  version = "1.0.0"
 
   name             = "Evicted Keys"
   query            = "avg(${var.evicted_keys_evaluation_period}):avg:redis.keys.evicted{${local.evicted_keys_filter}} >= ${var.evicted_keys_critical}"

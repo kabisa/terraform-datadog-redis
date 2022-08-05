@@ -7,7 +7,7 @@ locals {
 
 module "blocked_clients_clients" {
   source  = "kabisa/generic-monitor/datadog"
-  version = "0.7.5"
+  version = "1.0.0"
 
   name             = "Blocked Clients"
   query            = "avg(${var.blocked_clients_evaluation_period}):avg:redis.clients.blocked{${local.blocked_clients_filter}} >= ${var.blocked_clients_critical}"

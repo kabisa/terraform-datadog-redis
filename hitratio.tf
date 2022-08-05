@@ -7,7 +7,7 @@ locals {
 
 module "hitratio" {
   source  = "kabisa/generic-monitor/datadog"
-  version = "0.7.5"
+  version = "1.0.0"
 
   name             = "Hitratio"
   query            = "avg(${var.hitratio_evaluation_period}):( avg:redis.stats.keyspace_hits{${local.hitratio_filter}} / ( avg:redis.stats.keyspace_hits{${local.hitratio_filter}} + avg:redis.stats.keyspace_misses{${local.hitratio_filter}} ) ) * 100 <= ${var.hitratio_critical}"
